@@ -18,11 +18,11 @@ class ApiFeatures{
     filter(){
           
         const queryCopy = {...this.queryStr}
-        console.log(queryCopy)
+        // console.log(queryCopy)
         //Remove some field for Category
         const removeFields = ["keyword", "page", "limit"]
         removeFields.forEach( (key)=> delete queryCopy[key])
-        console.log(queryCopy)
+        // console.log(queryCopy)
 
         // Filter for Price and Range
         let queryStr = JSON.stringify(queryCopy)
@@ -30,6 +30,14 @@ class ApiFeatures{
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, key=>`$${key}`)
         this.query = this.query.find(JSON.parse(queryStr))
         return this
+    }
+    pagination(resultPerPage){
+        const currentPage = Number(this.queryStr.page) || 1
+        const firstResultToSkip = resultPerPage * (currentPage - 1)
+        this.query = this.query.limit(resultPerPage).skip(firstResultToSkip)
+        return this
+
+
     }
 }
 
