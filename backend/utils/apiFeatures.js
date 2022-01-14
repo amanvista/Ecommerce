@@ -4,16 +4,16 @@ class ApiFeatures{
         this.queryStr = queryStr
     }
     search(){
+        // console.log("Hi");
         const keyword = this.queryStr.keyword ? {
             name: {
                 $regex: this.queryStr.keyword,
                 $options: "i"
             }
         } : {}
-        // console.log(keyword )
-        console.log(query, queryStr)
+        // console.log(this.queryStr, keyword)
         this.query = this.query.find({...keyword})
-        return this
+        return this 
     }
     filter(){
         const queryCopy = {...this.queryStr}
