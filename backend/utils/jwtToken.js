@@ -14,4 +14,4 @@ const sendToken = (user, statusCode, res)=>{
         token 
     })
 }
-module.exports = sentToken
+module.exports = sendToken
